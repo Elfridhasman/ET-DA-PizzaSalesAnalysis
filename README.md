@@ -9,5 +9,5 @@ Semoga Project ini bermanfaat bagi teman-teman :)
 Stay Blessed :)
 
 Jika ada pertanyaan / kendala, bisa hubungi :
-Email : Elfrid Hasman
-Linkedin : Elfrid Hasman
+<p>Email : Elfrid Hasman</p>
+<pLinkedin : Elfrid Hasman</p>
