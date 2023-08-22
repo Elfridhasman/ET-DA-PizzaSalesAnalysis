@@ -10,4 +10,4 @@ Stay Blessed :)
 
 Jika ada pertanyaan / kendala, bisa hubungi :
 <p>Email : Elfrid Hasman</p>
-<pLinkedin : Elfrid Hasman</p>
+<p>Linkedin : Elfrid Hasman</p>
