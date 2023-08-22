@@ -165,6 +165,32 @@ FROM(
 	FROM MonthlySales
 ) AS current_month_data;
 
+-------------------------------------
+--Revenue Pizza Q1 - Q4 by category
+-------------------------------------
+WITH QuarterSales AS(
+	SELECT
+		pizza_types.category,
+		DATEPART(QUARTER, orders.date) AS quarter,
+		SUM(order_details.quantity * pizzas.price) AS total_sales
+	FROM orders 
+		JOIN order_details ON orders.order_id = order_details.order_id
+		JOIN pizzas ON pizzas.pizza_id = order_details.pizza_id
+		JOIN pizza_types ON pizza_types.pizza_type_id = pizzas.pizza_type_id
+	GROUP BY pizza_types.category, DATEPART(QUARTER, orders.date)
+)
+SELECT
+	COALESCE(category,'Grand Total') AS Category_Name,
+	ROUND(SUM(CASE WHEN quarter = 1 THEN total_sales ELSE 0 END),2) AS Q1,
+	ROUND(SUM(CASE WHEN quarter = 2 THEN total_sales ELSE 0 END),2) AS Q2,
+	ROUND(SUM(CASE WHEN quarter = 3 THEN total_sales ELSE 0 END),2) AS Q3,
+	ROUND(SUM(CASE WHEN quarter = 4 THEN total_sales ELSE 0 END),2) AS Q4
+FROM QuarterSales
+GROUP BY ROLLUP(category);
+
+
+
+
 
 
 
