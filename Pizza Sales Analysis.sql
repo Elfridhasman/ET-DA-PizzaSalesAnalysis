@@ -188,6 +188,36 @@ SELECT
 FROM QuarterSales
 GROUP BY ROLLUP(category);
 
+-------------------------------------
+-- Sales Trend Day of week over month
+-------------------------------------
+WITH MonthDaySales AS(
+	SELECT
+		DATENAME(MONTH, orders.date) AS month,
+		DATENAME(WEEKDAY, orders.date) AS day,
+		ROUND(SUM(order_details.quantity * pizzas.price),2) AS total_sales,
+		DATEPART(MONTH, orders.date) AS month_number
+	FROM orders 
+		JOIN order_details ON orders.order_id = order_details.order_id
+		JOIN pizzas ON pizzas.pizza_id = order_details.pizza_id
+		JOIN pizza_types ON pizza_types.pizza_type_id = pizzas.pizza_type_id
+	GROUP BY DATENAME(MONTH, orders.date), DATENAME(WEEKDAY, orders.date), DATEPART(MONTH, orders.date)
+)
+SELECT 
+	month,
+	SUM(CASE WHEN day = 'monday' THEN total_sales ELSE 0 END) AS monday,
+	SUM(CASE WHEN day = 'tuesday' THEN total_sales ELSE 0 END) AS tuesday,
+	SUM(CASE WHEN day = 'wednesday' THEN total_sales ELSE 0 END) AS wednesday,
+	SUM(CASE WHEN day = 'thursday' THEN total_sales ELSE 0 END) AS thursday,
+	SUM(CASE WHEN day = 'friday' THEN total_sales ELSE 0 END) AS friday,
+	SUM(CASE WHEN day = 'saturday' THEN total_sales ELSE 0 END) AS saturday,
+	SUM(CASE WHEN day = 'sunday' THEN total_sales ELSE 0 END) AS sunday
+FROM MonthDaySales
+GROUP BY month, month_number
+ORDER BY month_number ASC;
+	
+
+
 
 
 
