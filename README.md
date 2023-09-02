@@ -7,7 +7,7 @@ Tujuannya adalah agar teman-teman yang menonton video saya bisa dengan mudah mel
 Semoga Project ini bermanfaat bagi teman-teman :)
 
 Stay Blessed :)
-
-Jika ada pertanyaan / kendala, bisa hubungi :
-Email : Elfrid Hasman
+<hr>
+Jika ada pertanyaan / kendala, bisa hubungi :<br/>
+Email : Elfrid Hasman<br/>
 Linkedin : Elfrid Hasman
